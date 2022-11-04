@@ -1,16 +1,24 @@
 <script setup></script>
 
 <template>
-  <form @submit.prevent="">
-    <label for="characters" class="d-block">Characters</label>
-    <input
-      type="search"
-      name="characters"
-      id="characters"
-      placeholder="Enter character name..."
-    />
-    <input type="submit" value="Find" class="ml-4" />
-  </form>
+  <div class="container px-0">
+    <form @submit.prevent="">
+      <label for="characters" class="d-block">Characters</label>
+      <div class="row mx-auto">
+        <div class="col-8 col-sm-9 col-lg-10 px-0">
+          <input
+            type="search"
+            name="characters"
+            id="characters"
+            placeholder="Enter character name..."
+          />
+        </div>
+        <div class="col ml-2 ml-sm-3 ml-xl-4 px-0">
+          <input type="submit" value="Find" />
+        </div>
+      </div>
+    </form>
+  </div>
 </template>
 
 <style lang="scss" scoped>
@@ -21,7 +29,7 @@ label {
 input {
   &[type="search"] {
     padding: 0.5rem 0.8rem;
-    width: max(400px, 60vw);
+    width: 100%;
     border-radius: 4px;
     border: 1px solid grey;
     transition: 0.4s ease;

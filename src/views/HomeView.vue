@@ -7,7 +7,7 @@ import CharacterCards from "../components/CharacterCards.vue";
   <header class="container py-5 d-flex justify-content-center">
     <TheSearch />
   </header>
-  <main class="mb-5 pb-5">
+  <main>
     <CharacterCards />
   </main>
 </template>
