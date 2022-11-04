@@ -28,33 +28,37 @@ onMounted(() => {
         </div>
       </div>
       <div
-        class="content bg-white p-4 d-flex flex-column justify-content-center"
+        class="content bg-white p-1 p-sm-4 d-flex flex-column justify-content-center"
       >
         <div class="row py-2">
           <div class="col">
-            <div class="row px-4">
+            <div class="row px-3 px-sm-4">
               <div class="col"><h6>Climate:</h6></div>
-              <div class="col"><p class="text-right">Arid</p></div>
+              <div class="col-12 col-sm"><p class="text-sm-right">Arid</p></div>
             </div>
           </div>
           <div class="col">
-            <div class="row px-4">
+            <div class="row px-3 px-sm-4">
               <div class="col"><h6>Population:</h6></div>
-              <div class="col"><p class="text-right">120,0000</p></div>
+              <div class="col-12 col-sm">
+                <p class="text-sm-right">120,0000</p>
+              </div>
             </div>
           </div>
         </div>
         <div class="row py-2">
           <div class="col">
-            <div class="row px-4">
+            <div class="row px-3 px-sm-4">
               <div class="col"><h6>Terrain:</h6></div>
-              <div class="col"><p class="text-right">Desert</p></div>
+              <div class="col-12 col-sm">
+                <p class="text-sm-right">Desert</p>
+              </div>
             </div>
           </div>
           <div class="col">
-            <div class="row px-4">
+            <div class="row px-3 px-sm-4">
               <div class="col"><h6>Gravity:</h6></div>
-              <div class="col"><p class="text-right">1</p></div>
+              <div class="col-12 col-sm"><p class="text-sm-right">1</p></div>
             </div>
           </div>
         </div>
@@ -88,6 +92,7 @@ onMounted(() => {
     left: 50%;
     transform: translate(-50%, -50%);
     width: 70%;
+    max-width: 860px;
     height: 460px;
     border-radius: 6px;
     overflow: hidden;
@@ -126,6 +131,16 @@ onMounted(() => {
       h6 {
         font-size: 18px;
       }
+    }
+  }
+  @media (max-width: 576px) {
+    #homeworldview {
+      width: 90%;
+    }
+  }
+  @media (max-height: 576px) {
+    #homeworldview {
+      height: 90%;
     }
   }
 }
