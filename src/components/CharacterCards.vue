@@ -1,5 +1,8 @@
 <script setup>
 import { ref } from "vue";
+const openModal = () => {
+  document.getElementById("homeworldModal").style.display = "block";
+};
 const characters = ref([
   {
     name: "Luke Skywalker",
@@ -107,7 +110,7 @@ const characters = ref([
           </div>
         </div>
         <div class="d-flex justify-content-center">
-          <button type="button" class="">HomeWorld</button>
+          <button type="button" class="" @click="openModal">HomeWorld</button>
         </div>
       </div>
     </div>
@@ -144,6 +147,7 @@ const characters = ref([
       border-radius: 4px;
       padding: 0.4rem 1.6rem;
       transition: 0.4s ease;
+      outline: none;
       &:hover {
         scale: 1.1;
       }
