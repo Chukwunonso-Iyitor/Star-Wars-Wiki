@@ -77,7 +77,7 @@ const characters = ref([
 </script>
 
 <template>
-  <section class="container">
+  <section class="container pb-5">
     <div class="character-grid">
       <div
         v-for="({ name, height, mass }, index) in characters"
@@ -86,7 +86,7 @@ const characters = ref([
         data-aos="zoom-out"
         data-aos-easing="ease-out"
         data-aos-duration="800"
-        :data-aos-delay="`${100 + index * 150}`"
+        :data-aos-delay="`${100 + index * 100}`"
       >
         <img
           src="../assets/img/avatar.svg"

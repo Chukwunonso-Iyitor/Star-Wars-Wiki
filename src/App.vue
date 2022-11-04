@@ -13,7 +13,7 @@ AOS.init({ once: true });
 
 <style lang="scss">
 @import "assets/scss/main.scss";
-/* body {
-  background-color: $mygrey;
-} */
+body {
+  min-height: 120vh;
+}
 </style>
