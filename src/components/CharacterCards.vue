@@ -137,7 +137,6 @@ const characters = ref([
       font-size: 12px;
     }
     button {
-      /* background-image: linear-gradient(to left, $myskyblue, $myskyblue); */
       background-color: $myblue;
       font-size: 14px;
       color: $mywhite;
