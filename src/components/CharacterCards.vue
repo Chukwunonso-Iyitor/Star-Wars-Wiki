@@ -67,7 +67,7 @@ fetch(url)
   <section class="py-4">
     <div class="container">
       <div class="row justify-content-end">
-        <div class="col-2">
+        <div class="col-5 col-sm-3 col-lg-2">
           <button type="button" class="page-btn" disabled>
             <i class="bi bi-chevron-left"></i></button
           ><span class="px-2">1 of 9</span>
