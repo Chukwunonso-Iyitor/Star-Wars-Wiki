@@ -6,19 +6,41 @@ const openModal = () => {
 
 const data = ref(null);
 const error = ref(null);
-let url = ["https://swapi.dev/api/people/?page=1"];
+let current = ref(1);
 
-fetch(url)
+let url = ref([`https://swapi.dev/api/people/?page=${current.value}`]);
+
+fetch(url.value)
   .then((res) => res.json())
   .then((json) => (data.value = json))
   .catch((err) => (error.value = err));
+
+const prevPage = () => {
+  current.value--;
+  console.log(url.value);
+  url = ref([`https://swapi.dev/api/people/?page=${current.value}`]);
+  fetch(url.value)
+    .then((res) => res.json())
+    .then((json) => (data.value = json))
+    .catch((err) => (error.value = err));
+};
+const nextPage = () => {
+  current.value++;
+  console.log(url.value);
+  url = ref([`https://swapi.dev/api/people/?page=${current.value}`]);
+
+  fetch(url.value)
+    .then((res) => res.json())
+    .then((json) => (data.value = json))
+    .catch((err) => (error.value = err));
+};
 </script>
 
 <template>
   <section class="container pb-5">
     <div v-if="error">Oops! Error encountered: {{ error.message }}</div>
     <div v-else-if="data">
-      <!-- <pre>{{ data.results }}</pre> -->
+      <!-- <pre>{{ data.next }}</pre> -->
       <div class="character-grid">
         <div
           v-for="({ name, height, mass }, index) in data.results"
@@ -68,10 +90,22 @@ fetch(url)
     <div class="container">
       <div class="row justify-content-end">
         <div class="col-5 col-sm-3 col-lg-2">
-          <button type="button" class="page-btn" disabled>
+          <button
+            id="prevBtn"
+            type="button"
+            class="page-btn"
+            @click="prevPage"
+            :disabled="current == 1"
+          >
             <i class="bi bi-chevron-left"></i></button
-          ><span class="px-2">1 of 9</span>
-          <button type="button" class="page-btn">
+          ><span class="px-2">{{ current }} of 9</span>
+          <button
+            id="nextBtn"
+            type="button"
+            class="page-btn"
+            @click="nextPage"
+            :disabled="current == 9"
+          >
             <i class="bi bi-chevron-right"></i>
           </button>
         </div>
