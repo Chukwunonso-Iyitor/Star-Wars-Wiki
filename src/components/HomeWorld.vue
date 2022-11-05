@@ -83,8 +83,8 @@ onMounted(() => {
     left: 0;
     right: 0;
     bottom: 0;
-    -webkit-backdrop-filter: blur(4px) brightness(0.8);
-    backdrop-filter: blur(4px) brightness(0.8);
+    -webkit-backdrop-filter: blur(4px) brightness(0.6);
+    backdrop-filter: blur(4px) brightness(0.6);
   }
   #homeworldview {
     position: absolute;

@@ -3,117 +3,133 @@ import { ref } from "vue";
 const openModal = () => {
   document.getElementById("homeworldModal").style.display = "block";
 };
-const characters = ref([
-  {
-    name: "Luke Skywalker",
-    height: "172",
-    mass: "77",
-    homeworld: "https://swapi.dev/api/planets/1/",
-  },
-  {
-    name: "Luke Skywalker",
-    height: "172",
-    mass: "77",
-    homeworld: "https://swapi.dev/api/planets/1/",
-  },
-  {
-    name: "Luke Skywalker",
-    height: "172",
-    mass: "77",
-    homeworld: "https://swapi.dev/api/planets/1/",
-  },
-  {
-    name: "Luke Skywalker",
-    height: "172",
-    mass: "77",
-    homeworld: "https://swapi.dev/api/planets/1/",
-  },
-  {
-    name: "Luke Skywalker",
-    height: "172",
-    mass: "77",
-    homeworld: "https://swapi.dev/api/planets/1/",
-  },
-  {
-    name: "Luke Skywalker",
-    height: "172",
-    mass: "77",
-    homeworld: "https://swapi.dev/api/planets/1/",
-  },
-  {
-    name: "Luke Skywalker",
-    height: "172",
-    mass: "77",
-    homeworld: "https://swapi.dev/api/planets/1/",
-  },
-  {
-    name: "Luke Skywalker",
-    height: "172",
-    mass: "77",
-    homeworld: "https://swapi.dev/api/planets/1/",
-  },
-  {
-    name: "Luke Skywalker",
-    height: "172",
-    mass: "77",
-    homeworld: "https://swapi.dev/api/planets/1/",
-  },
-  {
-    name: "Luke Skywalker",
-    height: "172",
-    mass: "77",
-    homeworld: "https://swapi.dev/api/planets/1/",
-  },
-  {
-    name: "Luke Skywalker",
-    height: "172",
-    mass: "77",
-    homeworld: "https://swapi.dev/api/planets/1/",
-  },
-  {
-    name: "Luke Skywalker",
-    height: "172",
-    mass: "77",
-    homeworld: "https://swapi.dev/api/planets/1/",
-  },
-]);
+
+const data = ref(null);
+const error = ref(null);
+
+fetch("https://swapi.dev/api/people/")
+  .then((res) => res.json())
+  .then((json) => (data.value = json))
+  .catch((err) => (error.value = err));
+
+// console.log(data);
+
+// const characters = ref([
+//   {
+//     name: "Luke Skywalker",
+//     height: "172",
+//     mass: "77",
+//     homeworld: "https://swapi.dev/api/planets/1/",
+//   },
+//   {
+//     name: "Luke Skywalker",
+//     height: "172",
+//     mass: "77",
+//     homeworld: "https://swapi.dev/api/planets/1/",
+//   },
+//   {
+//     name: "Luke Skywalker",
+//     height: "172",
+//     mass: "77",
+//     homeworld: "https://swapi.dev/api/planets/1/",
+//   },
+//   {
+//     name: "Luke Skywalker",
+//     height: "172",
+//     mass: "77",
+//     homeworld: "https://swapi.dev/api/planets/1/",
+//   },
+//   {
+//     name: "Luke Skywalker",
+//     height: "172",
+//     mass: "77",
+//     homeworld: "https://swapi.dev/api/planets/1/",
+//   },
+//   {
+//     name: "Luke Skywalker",
+//     height: "172",
+//     mass: "77",
+//     homeworld: "https://swapi.dev/api/planets/1/",
+//   },
+//   {
+//     name: "Luke Skywalker",
+//     height: "172",
+//     mass: "77",
+//     homeworld: "https://swapi.dev/api/planets/1/",
+//   },
+//   {
+//     name: "Luke Skywalker",
+//     height: "172",
+//     mass: "77",
+//     homeworld: "https://swapi.dev/api/planets/1/",
+//   },
+//   {
+//     name: "Luke Skywalker",
+//     height: "172",
+//     mass: "77",
+//     homeworld: "https://swapi.dev/api/planets/1/",
+//   },
+//   {
+//     name: "Luke Skywalker",
+//     height: "172",
+//     mass: "77",
+//     homeworld: "https://swapi.dev/api/planets/1/",
+//   },
+//   {
+//     name: "Luke Skywalker",
+//     height: "172",
+//     mass: "77",
+//     homeworld: "https://swapi.dev/api/planets/1/",
+//   },
+//   {
+//     name: "Luke Skywalker",
+//     height: "172",
+//     mass: "77",
+//     homeworld: "https://swapi.dev/api/planets/1/",
+//   },
+// ]);
 </script>
 
 <template>
   <section class="container pb-5">
-    <div class="character-grid">
-      <div
-        v-for="({ name, height, mass }, index) in characters"
-        :key="name"
-        class="character-card bg-grey p-3 shadowed"
-        data-aos="zoom-out"
-        data-aos-easing="ease-out"
-        data-aos-duration="800"
-        :data-aos-delay="`${100 + index * 100}`"
-      >
-        <img
-          src="../assets/img/avatar.svg"
-          alt="Avatar"
-          class="d-block mx-auto avatar"
-        />
-        <h5 class="text-center my-3">{{ name }}</h5>
-        <div class="row px-4">
-          <div class="col"><p class="text-center">W:</p></div>
-          <div class="col">
-            <p class="text-center">{{ mass }}</p>
+    <div v-if="error">Oops! Error encountered: {{ error.message }}</div>
+    <div v-else-if="data">
+      <!-- <pre>{{ data.results }}</pre> -->
+      <div class="character-grid">
+        <div
+          v-for="({ name, height, mass }, index) in data.results"
+          :key="name"
+          class="character-card bg-grey p-3 shadowed"
+          data-aos="zoom-out"
+          data-aos-easing="ease-out"
+          data-aos-duration="800"
+          :data-aos-delay="`${100 + index * 100}`"
+        >
+          <img
+            src="../assets/img/avatar.svg"
+            alt="Avatar"
+            class="d-block mx-auto avatar"
+          />
+          <h5 class="text-center my-3">{{ name }}</h5>
+          <div class="row px-4">
+            <div class="col"><p class="text-center">W:</p></div>
+            <div class="col">
+              <p class="text-center">{{ mass }}</p>
+            </div>
           </div>
-        </div>
-        <div class="row px-4">
-          <div class="col"><p class="text-center">H:</p></div>
-          <div class="col">
-            <p class="text-center">{{ height }}</p>
+          <div class="row px-4">
+            <div class="col"><p class="text-center">H:</p></div>
+            <div class="col">
+              <p class="text-center">{{ height }}</p>
+            </div>
           </div>
-        </div>
-        <div class="d-flex justify-content-center">
-          <button type="button" class="" @click="openModal">HomeWorld</button>
+          <div class="d-flex justify-content-center">
+            <button type="button" class="" @click="openModal">HomeWorld</button>
+          </div>
         </div>
       </div>
     </div>
+    <div v-else>Loading...</div>
   </section>
 </template>
 
