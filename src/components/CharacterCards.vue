@@ -6,88 +6,12 @@ const openModal = () => {
 
 const data = ref(null);
 const error = ref(null);
+let url = ["https://swapi.dev/api/people/?page=1"];
 
-fetch("https://swapi.dev/api/people/")
+fetch(url)
   .then((res) => res.json())
   .then((json) => (data.value = json))
   .catch((err) => (error.value = err));
-
-// console.log(data);
-
-// const characters = ref([
-//   {
-//     name: "Luke Skywalker",
-//     height: "172",
-//     mass: "77",
-//     homeworld: "https://swapi.dev/api/planets/1/",
-//   },
-//   {
-//     name: "Luke Skywalker",
-//     height: "172",
-//     mass: "77",
-//     homeworld: "https://swapi.dev/api/planets/1/",
-//   },
-//   {
-//     name: "Luke Skywalker",
-//     height: "172",
-//     mass: "77",
-//     homeworld: "https://swapi.dev/api/planets/1/",
-//   },
-//   {
-//     name: "Luke Skywalker",
-//     height: "172",
-//     mass: "77",
-//     homeworld: "https://swapi.dev/api/planets/1/",
-//   },
-//   {
-//     name: "Luke Skywalker",
-//     height: "172",
-//     mass: "77",
-//     homeworld: "https://swapi.dev/api/planets/1/",
-//   },
-//   {
-//     name: "Luke Skywalker",
-//     height: "172",
-//     mass: "77",
-//     homeworld: "https://swapi.dev/api/planets/1/",
-//   },
-//   {
-//     name: "Luke Skywalker",
-//     height: "172",
-//     mass: "77",
-//     homeworld: "https://swapi.dev/api/planets/1/",
-//   },
-//   {
-//     name: "Luke Skywalker",
-//     height: "172",
-//     mass: "77",
-//     homeworld: "https://swapi.dev/api/planets/1/",
-//   },
-//   {
-//     name: "Luke Skywalker",
-//     height: "172",
-//     mass: "77",
-//     homeworld: "https://swapi.dev/api/planets/1/",
-//   },
-//   {
-//     name: "Luke Skywalker",
-//     height: "172",
-//     mass: "77",
-//     homeworld: "https://swapi.dev/api/planets/1/",
-//   },
-//   {
-//     name: "Luke Skywalker",
-//     height: "172",
-//     mass: "77",
-//     homeworld: "https://swapi.dev/api/planets/1/",
-//   },
-//   {
-//     name: "Luke Skywalker",
-//     height: "172",
-//     mass: "77",
-//     homeworld: "https://swapi.dev/api/planets/1/",
-//   },
-// ]);
 </script>
 
 <template>
@@ -136,6 +60,21 @@ fetch("https://swapi.dev/api/people/")
       <div>
         <div class="spinner-border text-blue text-center ml-3 mb-2"></div>
         <p class="text-center">Loading...</p>
+      </div>
+    </div>
+  </section>
+  <!-- Pagination  -->
+  <section class="py-4">
+    <div class="container">
+      <div class="row justify-content-end">
+        <div class="col-2">
+          <button type="button" class="page-btn" disabled>
+            <i class="bi bi-chevron-left"></i></button
+          ><span class="px-2">1 of 9</span>
+          <button type="button" class="page-btn">
+            <i class="bi bi-chevron-right"></i>
+          </button>
+        </div>
       </div>
     </div>
   </section>
@@ -198,5 +137,11 @@ fetch("https://swapi.dev/api/people/")
 }
 .loading {
   height: 60vh;
+}
+.page-btn {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  font-size: 18px;
 }
 </style>
