@@ -129,7 +129,15 @@ fetch("https://swapi.dev/api/people/")
         </div>
       </div>
     </div>
-    <div v-else>Loading...</div>
+    <div
+      v-else
+      class="loading d-flex justify-content-center align-items-center"
+    >
+      <div>
+        <div class="spinner-border text-blue text-center ml-3 mb-2"></div>
+        <p class="text-center">Loading...</p>
+      </div>
+    </div>
   </section>
 </template>
 
@@ -187,5 +195,8 @@ fetch("https://swapi.dev/api/people/")
   .character-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+}
+.loading {
+  height: 60vh;
 }
 </style>
