@@ -1,35 +1,17 @@
 <script setup>
-import { ref } from "vue";
-import { useFetch, query } from "@/stores/query.js";
+import { ref, computed } from "vue";
+import { useFetch } from "@/useFetch.js";
+import { query } from "@/stores/query.js";
 import TheSearch from "./TheSearch.vue";
+
 const search = ref(query);
 
-const openModal = () => {
-  document.getElementById("homeworldModal").style.display = "block";
-};
+const baseUrl = "https://swapi.dev/api/people/?";
+const id = ref("1");
+let url = computed(() => baseUrl + `${`page=` + id.value}`);
+// console.log(url.value);
 
-let current = ref(1);
-let url;
-
-const prevPage = () => {
-  current.value--;
-  console.log(url.value);
-  url = ref([`https://swapi.dev/api/people/?${`page=` + current.value}`]);
-  fetch(url.value)
-    .then((res) => res.json())
-    .then((json) => (data.value = json))
-    .catch((err) => (error.value = err));
-};
-const nextPage = () => {
-  current.value++;
-  console.log(url.value);
-  url = ref([`https://swapi.dev/api/people/?${`page=` + current.value}`]);
-
-  fetch(url.value)
-    .then((res) => res.json())
-    .then((json) => (data.value = json))
-    .catch((err) => (error.value = err));
-};
+const { data, error } = useFetch(url);
 
 const findCharacter = () => {
   console.log(url.value);
@@ -40,8 +22,9 @@ const findCharacter = () => {
     .catch((err) => (error.value = err));
 };
 
-url = ref([`https://swapi.dev/api/people/?${`page=` + current.value}`]);
-const { error, data } = useFetch(url.value);
+const openModal = () => {
+  document.getElementById("homeworldModal").style.display = "block";
+};
 </script>
 
 <template>
@@ -103,22 +86,22 @@ const { error, data } = useFetch(url.value);
   <section class="py-4 mb-4">
     <div class="container">
       <div class="row justify-content-end">
-        <div class="col-8 col-sm-3 col-lg-2">
+        <div v-if="data" class="col-8 col-sm-3 col-lg-2">
           <button
             id="prevBtn"
             type="button"
             class="page-btn"
-            @click="prevPage"
-            :disabled="current == 1"
+            @click="id--"
+            :disabled="!data.previous"
           >
             <i class="bi bi-chevron-left"></i></button
-          ><span class="px-2">{{ current }} of 9</span>
+          ><span class="px-2">{{ id }} of 9</span>
           <button
             id="nextBtn"
             type="button"
             class="page-btn"
-            @click="nextPage"
-            :disabled="current == 9"
+            @click="id++"
+            :disabled="!data.next"
           >
             <i class="bi bi-chevron-right"></i>
           </button>
@@ -191,5 +174,8 @@ const { error, data } = useFetch(url.value);
   outline: none;
   background-color: transparent;
   font-size: 18px;
+  &[disabled] {
+    cursor: not-allowed;
+  }
 }
 </style>
