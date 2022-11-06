@@ -1,5 +1,9 @@
 <script setup>
 import { ref } from "vue";
+import { query } from "@/stores/query.js";
+import TheSearch from "./TheSearch.vue";
+const search = ref(query);
+
 const openModal = () => {
   document.getElementById("homeworldModal").style.display = "block";
 };
@@ -8,17 +12,27 @@ const data = ref(null);
 const error = ref(null);
 let current = ref(1);
 
-let url = ref([`https://swapi.dev/api/people/?page=${current.value}`]);
+let url = ref([`https://swapi.dev/api/people/?${`page=` + current.value}`]);
+console.log(url.value);
 
 fetch(url.value)
   .then((res) => res.json())
   .then((json) => (data.value = json))
   .catch((err) => (error.value = err));
 
+const findCharacter = () => {
+  console.log(url.value);
+  url = ref([`https://swapi.dev/api/people/?${`search=` + search.value.name}`]);
+  fetch(url.value)
+    .then((res) => res.json())
+    .then((json) => (data.value = json))
+    .catch((err) => (error.value = err));
+};
+
 const prevPage = () => {
   current.value--;
   console.log(url.value);
-  url = ref([`https://swapi.dev/api/people/?page=${current.value}`]);
+  url = ref([`https://swapi.dev/api/people/?${`page=` + current.value}`]);
   fetch(url.value)
     .then((res) => res.json())
     .then((json) => (data.value = json))
@@ -27,7 +41,7 @@ const prevPage = () => {
 const nextPage = () => {
   current.value++;
   console.log(url.value);
-  url = ref([`https://swapi.dev/api/people/?page=${current.value}`]);
+  url = ref([`https://swapi.dev/api/people/?${`page=` + current.value}`]);
 
   fetch(url.value)
     .then((res) => res.json())
@@ -37,15 +51,20 @@ const nextPage = () => {
 </script>
 
 <template>
+  <TheSearch class="my-5" @findCharacter="findCharacter" />
+
   <section class="container pb-5">
     <div v-if="error">Oops! Error encountered: {{ error.message }}</div>
     <div v-else-if="data">
-      <!-- <pre>{{ data.next }}</pre> -->
+      <!-- <pre>{{ data }}</pre> -->
+      <div v-show="data.count == 0">
+        <h4>No results found</h4>
+      </div>
       <div class="character-grid">
         <div
           v-for="({ name, height, mass }, index) in data.results"
           :key="name"
-          class="character-card bg-grey p-3 shadowed"
+          class="character-card bg-grey px-3 py-4 shadowed"
           data-aos="zoom-out"
           data-aos-easing="ease-out"
           data-aos-duration="800"
@@ -86,10 +105,10 @@ const nextPage = () => {
     </div>
   </section>
   <!-- Pagination  -->
-  <section class="py-4">
+  <section class="py-4 mb-4">
     <div class="container">
       <div class="row justify-content-end">
-        <div class="col-5 col-sm-3 col-lg-2">
+        <div class="col-8 col-sm-3 col-lg-2">
           <button
             id="prevBtn"
             type="button"

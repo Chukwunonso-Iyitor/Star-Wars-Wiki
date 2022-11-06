@@ -1,8 +1,14 @@
-<script setup></script>
+<script setup>
+import { ref } from "vue";
+import { query } from "@/stores/query.js";
+
+const search = ref(query);
+defineEmits(["findCharacter"]);
+</script>
 
 <template>
   <div class="container px-0">
-    <form @submit.prevent="">
+    <form @submit.prevent="$emit('findCharacter'), (search.name = '')">
       <label for="characters" class="d-block">Characters</label>
       <div class="row mx-auto">
         <div class="col-8 col-sm-9 col-lg-10 px-0">
@@ -11,10 +17,11 @@
             name="characters"
             id="characters"
             placeholder="Enter character name..."
+            v-model="search.name"
           />
         </div>
         <div class="col ml-2 ml-sm-3 ml-xl-4 px-0">
-          <input type="submit" value="Find" />
+          <input type="submit" value="Find" :disabled="search.name == ''" />
         </div>
       </div>
     </form>
@@ -42,7 +49,7 @@ input {
     }
   }
   &[type="submit"] {
-    background-image: linear-gradient(to right, $myblue, $myblue);
+    background-color: $myblue;
     color: $mywhite;
     border: none;
     border-radius: 4px;
@@ -53,6 +60,10 @@ input {
     }
     &:active {
       scale: 0.95;
+    }
+    &[disabled] {
+      scale: 1;
+      background-color: $mygrey;
     }
   }
 }
