@@ -5,13 +5,14 @@ import { query } from "@/stores/query.js";
 import TheSearch from "./TheSearch.vue";
 
 const search = ref(query);
-
+let url;
 const baseUrl = "https://swapi.dev/api/people/?";
 const id = ref("1");
-let url = computed(() => baseUrl + `${`page=` + id.value}`);
-// console.log(url.value);
+url = computed(() => baseUrl + `${`page=` + id.value}`);
 
 const { data, error } = useFetch(url);
+
+// console.log(url.value);
 
 const findCharacter = () => {
   console.log(url.value);
