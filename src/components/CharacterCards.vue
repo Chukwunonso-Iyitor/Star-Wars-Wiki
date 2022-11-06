@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from "vue";
-import { query } from "@/stores/query.js";
+import { useFetch, query } from "@/stores/query.js";
 import TheSearch from "./TheSearch.vue";
 const search = ref(query);
 
@@ -8,26 +8,8 @@ const openModal = () => {
   document.getElementById("homeworldModal").style.display = "block";
 };
 
-const data = ref(null);
-const error = ref(null);
 let current = ref(1);
-
-let url = ref([`https://swapi.dev/api/people/?${`page=` + current.value}`]);
-console.log(url.value);
-
-fetch(url.value)
-  .then((res) => res.json())
-  .then((json) => (data.value = json))
-  .catch((err) => (error.value = err));
-
-const findCharacter = () => {
-  console.log(url.value);
-  url = ref([`https://swapi.dev/api/people/?${`search=` + search.value.name}`]);
-  fetch(url.value)
-    .then((res) => res.json())
-    .then((json) => (data.value = json))
-    .catch((err) => (error.value = err));
-};
+let url;
 
 const prevPage = () => {
   current.value--;
@@ -48,6 +30,18 @@ const nextPage = () => {
     .then((json) => (data.value = json))
     .catch((err) => (error.value = err));
 };
+
+const findCharacter = () => {
+  console.log(url.value);
+  url = ref([`https://swapi.dev/api/people/?${`search=` + search.value.name}`]);
+  fetch(url.value)
+    .then((res) => res.json())
+    .then((json) => (data.value = json))
+    .catch((err) => (error.value = err));
+};
+
+url = ref([`https://swapi.dev/api/people/?${`page=` + current.value}`]);
+const { error, data } = useFetch(url.value);
 </script>
 
 <template>
@@ -62,7 +56,7 @@ const nextPage = () => {
       </div>
       <div class="character-grid">
         <div
-          v-for="({ name, height, mass }, index) in data.results"
+          v-for="({ name, height, mass, homeworld }, index) in data.results"
           :key="name"
           class="character-card bg-grey px-3 py-4 shadowed"
           data-aos="zoom-out"
@@ -91,6 +85,7 @@ const nextPage = () => {
           <div class="d-flex justify-content-center">
             <button type="button" class="" @click="openModal">HomeWorld</button>
           </div>
+          <!-- <sup>{{ homeworld }}</sup> -->
         </div>
       </div>
     </div>

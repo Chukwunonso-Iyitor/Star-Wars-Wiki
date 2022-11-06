@@ -10,7 +10,7 @@ import HomeWorld from "../components/HomeWorld.vue";
   </header> -->
   <main>
     <CharacterCards />
-    <HomeWorld />
+    <HomeWorld planet="" />
   </main>
 </template>
 

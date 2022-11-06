@@ -10,18 +10,29 @@ onMounted(() => {
     }
   });
 });
-// defineProps({
-//   msg: {
+// const props = defineProps({
+//   planet: {
 //     type: String,
 //     required: true,
 //   },
 // });
+
+// const data = ref(null);
+// const error = ref(null);
+// // let url = ref([`https://swapi.dev/api/planets/1`]);
+// let url = ref([props.planet]);
+// console.log(url.value);
+
+// fetch(url.value)
+//   .then((res) => res.json())
+//   .then((json) => (data.value = json))
+//   .catch((err) => (error.value = err));
 </script>
 
 <template>
   <div id="homeworldModal">
     <div class="homeworld-backdrop" @click="closeModal"></div>
-    <div id="homeworldview" class="shadow">
+    <div id="homeworldview" class="shadow bg-white">
       <div class="banner">
         <span
           @click="closeModal"
@@ -40,7 +51,9 @@ onMounted(() => {
           <div class="col">
             <div class="row px-3 px-sm-4">
               <div class="col"><h6>Climate:</h6></div>
-              <div class="col-12 col-sm"><p class="text-sm-right">Arid</p></div>
+              <div class="col-12 col-sm">
+                <p class="text-sm-right">Arid</p>
+              </div>
             </div>
           </div>
           <div class="col">
