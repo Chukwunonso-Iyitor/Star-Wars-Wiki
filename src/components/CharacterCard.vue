@@ -21,33 +21,35 @@ defineEmits(["openModal"]);
 </script>
 
 <template>
-  <div class="character-card bg-grey px-3 py-4 shadowed">
-    <img
-      src="../assets/img/avatar.svg"
-      alt="Avatar"
-      class="d-block mx-auto avatar"
-    />
-    <h5 class="text-center my-3">{{ name }}</h5>
-    <div class="row px-4">
-      <div class="col"><p class="text-center">W:</p></div>
-      <div class="col">
-        <p class="text-center">{{ mass }}</p>
+  <div>
+    <div class="character-card bg-darkgrey text-white px-3 py-4 shadowed">
+      <img
+        src="../assets/img/avatar.svg"
+        alt="Avatar"
+        class="d-block mx-auto avatar"
+      />
+      <h5 class="text-center my-3">{{ name }}</h5>
+      <div class="row px-4">
+        <div class="col"><p class="text-center">W:</p></div>
+        <div class="col">
+          <p class="text-center">{{ mass }}</p>
+        </div>
       </div>
-    </div>
-    <div class="row px-4">
-      <div class="col"><p class="text-center">H:</p></div>
-      <div class="col">
-        <p class="text-center">{{ height }}</p>
+      <div class="row px-4">
+        <div class="col"><p class="text-center">H:</p></div>
+        <div class="col">
+          <p class="text-center">{{ height }}</p>
+        </div>
       </div>
-    </div>
-    <div class="d-flex justify-content-center">
-      <button
-        type="button"
-        class="modalBtn"
-        @click="$emit('openModal'), homeworld"
-      >
-        HomeWorld
-      </button>
+      <div class="d-flex justify-content-center">
+        <button
+          type="button"
+          class="modalBtn"
+          @click="$emit('openModal'), homeworld"
+        >
+          HomeWorld
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -57,6 +59,11 @@ defineEmits(["openModal"]);
 .character {
   &-card {
     border-radius: 6px;
+    transition: border 0.8s ease;
+    border: 1px solid transparent;
+    &:hover {
+      border: 1px solid $myskyblue;
+    }
     .avatar {
       width: 50px;
       height: 50px;

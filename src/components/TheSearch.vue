@@ -9,7 +9,7 @@ defineEmits(["findCharacter"]);
 <template>
   <div class="container px-0">
     <form @submit.prevent="$emit('findCharacter'), (search.name = '')">
-      <label for="characters" class="d-block">Characters</label>
+      <label for="characters" class="d-block text-white">Characters</label>
       <div class="row mx-auto">
         <div class="col-8 col-sm-9 col-lg-10 px-0">
           <input
@@ -38,13 +38,15 @@ input {
     padding: 0.5rem 0.8rem;
     width: 100%;
     border-radius: 4px;
-    border: 1px solid grey;
+    border: 1px solid $myblue;
     transition: 0.4s ease;
+    background-color: transparent;
+    color: $mywhite;
     &:hover {
-      border-color: $mypink;
+      border-color: $myskyblue;
     }
     &:focus {
-      border-color: $mypink;
+      border-color: $myskyblue;
       outline: none;
     }
   }
@@ -64,6 +66,7 @@ input {
     &[disabled] {
       scale: 1;
       background-color: $mygrey;
+      cursor: not-allowed;
     }
   }
 }

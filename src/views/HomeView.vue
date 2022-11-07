@@ -5,6 +5,7 @@ import { query } from "@/stores/query.js";
 import TheSearch from "../components/TheSearch.vue";
 import CharacterCard from "../components/CharacterCard.vue";
 import HomeWorld from "../components/HomeWorld.vue";
+import SWlogo from "../components/SWlogo.vue";
 
 const search = ref(query);
 let url;
@@ -35,13 +36,24 @@ const openModal = (e) => {
 
 <template>
   <header class="my-5 container">
+    <div class="d-flex justify-content-center mb-4">
+      <SWlogo
+        class="logo"
+        @click="
+          id = 0;
+          searched.pop();
+          id = 1;
+        "
+      />
+    </div>
     <TheSearch @findCharacter="findCharacter" />
-    <p class="mt-3 d-inline-block">
+    <p class="mt-3 d-inline-block text-white">
       {{ searched[0] }}
     </p>
-    <p
+    <br />
+    <span
       v-show="searched.length > 0"
-      class="inline-block mb-0 clear-search"
+      class="inline mb-0 clear-search"
       @click="
         id = 0;
         searched.pop();
@@ -49,15 +61,17 @@ const openModal = (e) => {
       "
     >
       <i class="bi bi-trash3 mr-1"></i>clear
-    </p>
+    </span>
   </header>
 
   <main>
     <section class="container pb-5">
-      <div v-if="error">Oops! Error encountered: {{ error.message }}</div>
+      <div v-if="error" class="text-white">
+        Oops! Error encountered: {{ error.message }}
+      </div>
       <div v-else-if="data">
         <div v-show="data.count == 0">
-          <h4>No results found</h4>
+          <h4 class="text-white">No results found</h4>
         </div>
         <div class="character-grid">
           <CharacterCard
@@ -80,7 +94,7 @@ const openModal = (e) => {
       >
         <div>
           <div class="spinner-border text-blue text-center ml-3 mb-2"></div>
-          <p class="text-center">Loading...</p>
+          <p class="text-center text-white">Loading...</p>
         </div>
       </div>
     </section>
@@ -101,7 +115,7 @@ const openModal = (e) => {
               :disabled="!data.previous"
             >
               <i class="bi bi-chevron-left"></i></button
-            ><span class="px-2">{{ id }} of 9</span>
+            ><span class="px-2 text-white">{{ id }} of 9</span>
             <button
               id="nextBtn"
               type="button"
@@ -149,11 +163,23 @@ const openModal = (e) => {
   outline: none;
   background-color: transparent;
   font-size: 18px;
+  color: $mywhite;
   &[disabled] {
     cursor: not-allowed;
+    color: $mygrey;
   }
 }
 .clear-search {
+  cursor: pointer;
+  color: $mywhite;
+  transition: 0.2s ease;
+  &:hover {
+    color: $myred;
+  }
+}
+.logo {
+  width: 180px;
+  height: auto;
   cursor: pointer;
 }
 </style>

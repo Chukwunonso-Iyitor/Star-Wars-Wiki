@@ -38,8 +38,8 @@ const toTop = () => {
 @import "../assets/scss/main.scss";
 #back-to-top {
   border-radius: 60px;
-  border: 1px solid $myblue;
-  color: $myblue;
+  border: 1px solid $mywhite;
+  color: $mywhite;
   transition: 0.4s ease;
   background-color: transparent;
   visibility: hidden;
@@ -48,6 +48,7 @@ const toTop = () => {
   &:hover {
     background-color: $myblue;
     color: $mywhite;
+    border-color: $myblue;
   }
 }
 </style>

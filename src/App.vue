@@ -20,5 +20,6 @@ AOS.init({ once: true });
 @import "assets/scss/main.scss";
 body {
   min-height: 100vh;
+  background-color: $mydarkblue;
 }
 </style>
