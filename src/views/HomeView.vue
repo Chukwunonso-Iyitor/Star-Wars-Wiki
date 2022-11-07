@@ -14,19 +14,21 @@ url = computed(() => baseUrl + `${`page=` + id.value}`);
 
 const { data, error } = useFetch(url);
 
+let searched = ref([]);
 const findCharacter = () => {
-  console.log(url.value);
+  // console.log(url.value);
   url = ref([`https://swapi.dev/api/people/?${`search=` + search.value.name}`]);
   fetch(url.value)
     .then((res) => res.json())
     .then((json) => (data.value = json))
     .catch((err) => (error.value = err));
+  searched.value.pop();
+  searched.value.push(`Showing results for: ${search.value.name}`);
 };
 
 let planet = ref("");
 const openModal = (e) => {
   document.getElementById("homeworldModal").style.display = "block";
-  // console.log(e);
   planet.value = e;
 };
 </script>
@@ -34,6 +36,20 @@ const openModal = (e) => {
 <template>
   <header class="my-5 container">
     <TheSearch @findCharacter="findCharacter" />
+    <p class="mt-3 d-inline-block">
+      {{ searched[0] }}
+    </p>
+    <p
+      v-show="searched.length > 0"
+      class="inline-block mb-0 clear-search"
+      @click="
+        id = 0;
+        searched.pop();
+        id = 1;
+      "
+    >
+      <i class="bi bi-trash3 mr-1"></i>clear
+    </p>
   </header>
 
   <main>
@@ -73,7 +89,7 @@ const openModal = (e) => {
     <HomeWorld :planet="planet" />
 
     <!-- Pagination  -->
-    <section class="py-4 mb-4">
+    <section class="py-4 mb-4" v-show="searched.length == 0">
       <div class="container">
         <div class="row justify-content-end">
           <div v-if="data" class="col-8 col-sm-3 col-lg-2">
@@ -136,5 +152,8 @@ const openModal = (e) => {
   &[disabled] {
     cursor: not-allowed;
   }
+}
+.clear-search {
+  cursor: pointer;
 }
 </style>
