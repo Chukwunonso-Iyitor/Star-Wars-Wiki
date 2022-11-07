@@ -12,6 +12,10 @@ defineProps({
     type: String,
     required: true,
   },
+  homeworld: {
+    type: String,
+    required: false,
+  },
 });
 defineEmits(["openModal"]);
 </script>
@@ -37,7 +41,11 @@ defineEmits(["openModal"]);
       </div>
     </div>
     <div class="d-flex justify-content-center">
-      <button type="button" class="" @click="$emit('openModal')">
+      <button
+        type="button"
+        class="modalBtn"
+        @click="$emit('openModal'), homeworld"
+      >
         HomeWorld
       </button>
     </div>

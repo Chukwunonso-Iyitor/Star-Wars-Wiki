@@ -1,5 +1,6 @@
 <script setup>
-import { onMounted } from "vue";
+import { onMounted, computed } from "vue";
+import { useFetch } from "@/useFetch.js";
 const closeModal = () => {
   document.getElementById("homeworldModal").style.display = "none";
 };
@@ -10,29 +11,32 @@ onMounted(() => {
     }
   });
 });
-// const props = defineProps({
-//   planet: {
-//     type: String,
-//     required: true,
-//   },
-// });
+const props = defineProps({
+  planet: {
+    type: String,
+    required: true,
+  },
+});
 
-// const data = ref(null);
-// const error = ref(null);
-// // let url = ref([`https://swapi.dev/api/planets/1`]);
-// let url = ref([props.planet]);
-// console.log(url.value);
-
-// fetch(url.value)
-//   .then((res) => res.json())
-//   .then((json) => (data.value = json))
-//   .catch((err) => (error.value = err));
+let url = computed(() => `${props.planet}`);
+const { data, error } = useFetch(url);
 </script>
 
 <template>
   <div id="homeworldModal">
     <div class="homeworld-backdrop" @click="closeModal"></div>
-    <div id="homeworldview" class="shadow bg-white">
+    <!-- Error state  -->
+    <div
+      v-if="error"
+      class="homeworldview shadow bg-white d-flex justify-content-center align-items-center"
+    >
+      <div>
+        <div>Oops! Error encountered: {{ error.message }}</div>
+      </div>
+    </div>
+
+    <!-- Success state  -->
+    <div v-else-if="data" class="homeworldview shadow bg-white">
       <div class="banner">
         <span
           @click="closeModal"
@@ -41,7 +45,7 @@ onMounted(() => {
           ><i class="bi bi-x-lg text-white"></i
         ></span>
         <div class="banner-overlay p-5 d-flex align-items-center">
-          <h1 class="text-white">Tatooine</h1>
+          <h1 class="text-white">{{ data.name }}</h1>
         </div>
       </div>
       <div
@@ -52,7 +56,7 @@ onMounted(() => {
             <div class="row px-3 px-sm-4">
               <div class="col"><h6>Climate:</h6></div>
               <div class="col-12 col-sm">
-                <p class="text-sm-right">Arid</p>
+                <p class="text-sm-right text-capitalize">{{ data.climate }}</p>
               </div>
             </div>
           </div>
@@ -60,7 +64,7 @@ onMounted(() => {
             <div class="row px-3 px-sm-4">
               <div class="col"><h6>Population:</h6></div>
               <div class="col-12 col-sm">
-                <p class="text-sm-right">120,0000</p>
+                <p class="text-sm-right">{{ data.population }}</p>
               </div>
             </div>
           </div>
@@ -70,17 +74,30 @@ onMounted(() => {
             <div class="row px-3 px-sm-4">
               <div class="col"><h6>Terrain:</h6></div>
               <div class="col-12 col-sm">
-                <p class="text-sm-right">Desert</p>
+                <p class="text-sm-right">{{ data.terrain }}</p>
               </div>
             </div>
           </div>
           <div class="col">
             <div class="row px-3 px-sm-4">
               <div class="col"><h6>Gravity:</h6></div>
-              <div class="col-12 col-sm"><p class="text-sm-right">1</p></div>
+              <div class="col-12 col-sm">
+                <p class="text-sm-right">{{ data.gravity }}</p>
+              </div>
             </div>
           </div>
         </div>
+      </div>
+    </div>
+
+    <!-- Loading state -->
+    <div
+      v-else
+      class="homeworldview shadow bg-white d-flex justify-content-center align-items-center"
+    >
+      <div>
+        <div class="spinner-border text-blue text-center ml-3 mb-2"></div>
+        <p class="text-center">Loading...</p>
       </div>
     </div>
   </div>
@@ -105,7 +122,7 @@ onMounted(() => {
     -webkit-backdrop-filter: blur(4px) brightness(0.6);
     backdrop-filter: blur(4px) brightness(0.6);
   }
-  #homeworldview {
+  .homeworldview {
     position: absolute;
     top: 50%;
     left: 50%;
