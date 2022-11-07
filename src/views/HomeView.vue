@@ -6,6 +6,7 @@ import TheSearch from "../components/TheSearch.vue";
 import CharacterCard from "../components/CharacterCard.vue";
 import HomeWorld from "../components/HomeWorld.vue";
 import SWlogo from "../components/SWlogo.vue";
+import LightSabers from "../components/LightSabers.vue";
 
 const search = ref(query);
 let url;
@@ -92,9 +93,12 @@ const openModal = (e) => {
         v-else
         class="loading d-flex justify-content-center align-items-center"
       >
-        <div>
-          <div class="spinner-border text-blue text-center ml-3 mb-2"></div>
+        <div
+          class="d-flex flex-column justify-content-center align-items-center"
+        >
+          <div class="spinner-border text-blue text-center mr-1 mb-2"></div>
           <p class="text-center text-white">Loading...</p>
+          <LightSabers class="mx-auto mt-5 sabers" />
         </div>
       </div>
     </section>
@@ -140,12 +144,12 @@ const openModal = (e) => {
   gap: 2rem 2rem;
   justify-content: space-evenly;
 }
-@media (max-width: 991px) {
+@media (max-width: 1200px) {
   .character-grid {
     grid-template-columns: repeat(4, 1fr);
   }
 }
-@media (max-width: 768px) {
+@media (max-width: 991px) {
   .character-grid {
     grid-template-columns: repeat(3, 1fr);
   }
@@ -181,5 +185,8 @@ const openModal = (e) => {
   width: 180px;
   height: auto;
   cursor: pointer;
+}
+.sabers {
+  scale: 3;
 }
 </style>

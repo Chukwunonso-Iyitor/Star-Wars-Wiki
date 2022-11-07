@@ -59,7 +59,7 @@ defineEmits(["openModal"]);
 .character {
   &-card {
     border-radius: 6px;
-    transition: border 0.8s ease;
+    transition: 0.8s ease;
     border: 1px solid transparent;
     &:hover {
       border: 1px solid $myskyblue;

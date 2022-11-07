@@ -21,5 +21,6 @@ AOS.init({ once: true });
 body {
   min-height: 100vh;
   background-color: $mydarkblue;
+  background-image: url("@/assets/img/dots.svg");
 }
 </style>
