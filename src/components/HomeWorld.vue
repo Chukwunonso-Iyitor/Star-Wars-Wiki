@@ -177,6 +177,7 @@ const { data, error } = useFetch(url);
   @media (max-height: 576px) {
     .homeworldview {
       height: 90%;
+      width: 85%;
     }
   }
 }

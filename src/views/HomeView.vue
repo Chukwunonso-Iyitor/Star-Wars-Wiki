@@ -110,7 +110,7 @@ const openModal = (e) => {
     <section class="py-4 mb-4" v-show="searched.length == 0">
       <div class="container">
         <div class="row justify-content-end">
-          <div v-if="data" class="col-8 col-sm-3 col-lg-2">
+          <div v-if="data" class="col-8 col-sm-4 col-lg-2">
             <button
               id="prevBtn"
               type="button"

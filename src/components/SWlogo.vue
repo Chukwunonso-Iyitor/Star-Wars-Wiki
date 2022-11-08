@@ -1,3 +1,5 @@
+<script setup></script>
+
 <template>
   <svg
     xmlns:dc="http://purl.org/dc/elements/1.1/"
@@ -19,16 +21,16 @@
     inkscape:version="0.48.4 r9939"
     sodipodi:docname="Star_Wars_Logo.svg"
   >
-    <metadata id="metadata35">
+    <!-- <metadata id="metadata35">
       <rdf:RDF
         ><cc:Work rdf:about=""
           ><dc:format>image/svg+xml</dc:format
           ><dc:type
             rdf:resource="http://purl.org/dc/dcmitype/StillImage" /><dc:title></dc:title></cc:Work
       ></rdf:RDF>
-    </metadata>
+    </metadata> -->
     <defs id="defs33" />
-    <sodipodi:namedview
+    <!-- <sodipodi:namedview
       pagecolor="#ffffff"
       bordercolor="#666666"
       borderopacity="1"
@@ -52,7 +54,7 @@
       inkscape:window-y="-8"
       inkscape:window-maximized="1"
       inkscape:current-layer="Layer_1"
-    />
+    /> -->
 
     <g id="Layer_2" transform="translate(-29.908,-73.916003)">
       <g id="g7">
