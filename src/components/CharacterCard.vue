@@ -22,7 +22,9 @@ defineEmits(["openModal"]);
 
 <template>
   <div>
-    <div class="character-card bg-darkgrey text-white px-2 px-sm-3 py-4 shadowed">
+    <div
+      class="character-card bg-darkgrey text-white px-2 px-sm-3 py-4 shadowed"
+    >
       <img
         src="../assets/img/avatar.svg"
         alt="Avatar"
