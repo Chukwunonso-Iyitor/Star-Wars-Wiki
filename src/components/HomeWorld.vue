@@ -170,12 +170,12 @@ const { data, error } = useFetch(url);
     }
   }
   @media (max-width: 576px) {
-    #homeworldview {
+    .homeworldview {
       width: 90%;
     }
   }
   @media (max-height: 576px) {
-    #homeworldview {
+    .homeworldview {
       height: 90%;
     }
   }
